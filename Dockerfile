@@ -24,14 +24,7 @@ COPY --from=composer_builder /source/vendor ./vendor
 
 # 複製應用程式文件
 COPY . .
-
-
-# 設置權限和用戶
-RUN addgroup -g 1000 project_user \
-   && adduser -u 1000 -s /bin/bash -G project_user project_user -D \
-   && chmod -R 755 . \
-   && chmod -R ugo+rw storage \
-   && chown project_user:project_user .
+RUN touch ./database/database.sqlite
 
 
 # 複製 nginx 配置文件
