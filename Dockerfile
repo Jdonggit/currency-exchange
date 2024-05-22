@@ -17,10 +17,8 @@ RUN apk add --no-cache unzip libzip-dev zip libpng-dev nginx \
    && docker-php-ext-install zip pdo_mysql \
    && apk del .build-deps
 
-
-# 複製 composer 依賴
 COPY --from=composer_builder /source/vendor ./vendor
-
+COPY --from=composer_builder /source/bootstrap ./bootstrap
 
 # 複製應用程式文件
 COPY . .
